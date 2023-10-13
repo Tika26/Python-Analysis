@@ -1,0 +1,28 @@
+import os
+import csv
+
+#path to collect data
+election_csv = os.path.join('..', 'Resources', 'election_data.csv')
+with open (election_data) as csv_file:
+    csv_reader=csv.reader(csv_file, delimiter= ",")
+    next(csv_reader)
+    total_votes = 0
+    candidates = {}
+
+    for row in csv_reader:
+        candidate = row[2]
+        total_votes +=1
+        candidates[candidate] = candidates.get(candidates,0) + 1
+
+results = []
+for candidate, votes in candidates.items():
+    percentage = (votes / total_votes) * 100
+    results.append(candidate, percentage, votes)
+
+Winner = max(results, key=lambda x: x[2])
+             
+output = f'''
+Election Results
+
+Total votes: {total_votes:,}
+
